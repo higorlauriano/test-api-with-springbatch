@@ -3,7 +3,6 @@ package br.com.higorlauriano.springbatchtest.movie;
 import br.com.higorlauriano.springbatchtest.SpringBatchTestApplication;
 import br.com.higorlauriano.springbatchtest.model.movie.Movie;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import io.restassured.RestAssured;
 import org.apache.http.entity.ContentType;
 import org.hamcrest.Matchers;
@@ -18,12 +17,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.io.FileReader;
-import java.util.Arrays;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = SpringBatchTestApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -100,10 +98,11 @@ public class MovieIT {
     @Test
     public void sucess_save() {
 
-        var movie = getMovieFromMockFile("./src/test/resources/mock/movie.json");
+        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie.json");
 
         given()
                 .when()
+                .headers(Map.of(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType()))
                 .body(movie)
                 .post()
                 .then()
@@ -113,11 +112,12 @@ public class MovieIT {
     @Test
     public void sucess_edit() {
 
-        var movie = getMovieFromMockFile("./src/test/resources/mock/movie.json");
+        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie.json");
 
         given()
                 .when()
                 .body(movie)
+                .headers(Map.of(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType()))
                 .put("/{id}", 2L)
                 .then()
                 .statusCode(HttpStatus.OK.value())
