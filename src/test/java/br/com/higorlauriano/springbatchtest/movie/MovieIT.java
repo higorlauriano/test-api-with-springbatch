@@ -96,9 +96,9 @@ public class MovieIT {
     }
 
     @Test
-    public void sucess_save() {
+    public void success_save() {
 
-        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie.json");
+        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie_save.json");
 
         given()
                 .when()
@@ -110,9 +110,9 @@ public class MovieIT {
     }
 
     @Test
-    public void sucess_edit() {
+    public void success_edit() {
 
-        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie.json");
+        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie_edit.json");
 
         given()
                 .when()
@@ -128,7 +128,7 @@ public class MovieIT {
     @Test
     public void fail_edit() {
 
-        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie.json");
+        var movie = getMovieFromMockFile("./src/test/resources/mocks/movie_edit.json");
 
         given()
                 .when()

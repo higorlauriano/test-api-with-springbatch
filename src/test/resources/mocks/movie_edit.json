@@ -1,0 +1,17 @@
+{
+  "year": 1980,
+  "title": "Can't Stop the Music",
+  "producers": [
+    {
+      "id": 1,
+      "name": "Allan Carr"
+    }
+  ],
+  "studio": [
+    {
+      "id": 1,
+      "name": "Associated Film Distribution"
+    }
+  ],
+  "winner": true
+}
